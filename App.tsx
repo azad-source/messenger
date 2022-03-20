@@ -1,20 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from "@react-navigation/native";
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
+import { Home } from "./components/screens/Home";
+import { Chats } from "./components/screens/Chats";
+
+export type RootStackParam = {
+  Home: undefined;
+  Chats: { id: number; someField: string };
+};
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+  React.useRef<NavigationContainerRef<ReactNavigation.RootParamList>>();
+
+  const screenOptions: NativeStackNavigationOptions = {
+    headerTitleAlign: "center",
+    headerStyle: { backgroundColor: "#08c" },
+    headerTintColor: "#fff",
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions}>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: "Telegram" }}
+        />
+        <Stack.Screen
+          name="Chats"
+          component={Chats}
+          options={{ title: "Chat" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
