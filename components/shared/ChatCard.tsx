@@ -1,3 +1,4 @@
+import { textEllipsis } from "@domain/utils/stringHelper";
 import * as React from "react";
 import {
   StyleSheet,
@@ -5,25 +6,37 @@ import {
   Image,
   Text,
   ImageSourcePropType,
+  TouchableHighlight,
+  GestureResponderEvent,
 } from "react-native";
 
 interface Props {
   image?: ImageSourcePropType;
   name: string;
+  onClick: (event: GestureResponderEvent) => void;
 }
 
-export const ChatCard: React.FC<Props> = ({ image, name }) => {
+export const ChatCard: React.FC<Props> = ({ image, name, onClick }) => {
+  const nameArr = name.split(" ");
+
+  const nameInitials =
+    nameArr.length > 1
+      ? nameArr[0][0].toUpperCase() + nameArr[1][0].toUpperCase()
+      : nameArr[0][0].toUpperCase();
+
   return (
-    <View style={styles.root}>
-      <View style={styles.imageWrapper}>
-        {!!image && (
-          <Image source={image} style={styles.image} resizeMode={"cover"} />
-        )}
+    <TouchableHighlight onPress={onClick} underlayColor="#fff">
+      <View style={styles.root}>
+        <View style={styles.imageWrapper}>
+          {!!image ? (
+            <Image source={image} style={styles.image} resizeMode={"cover"} />
+          ) : (
+            <Text style={styles.nameInitials}>{nameInitials}</Text>
+          )}
+        </View>
+        <Text style={styles.name}>{textEllipsis(name, 30)}</Text>
       </View>
-      <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>
-        {name}
-      </Text>
-    </View>
+    </TouchableHighlight>
   );
 };
 
@@ -44,6 +57,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 100,
     backgroundColor: "#ccc",
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     width: "100%",
@@ -52,5 +67,12 @@ const styles = StyleSheet.create({
   name: {
     marginLeft: 15,
     fontSize: 16,
+  },
+  nameInitials: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

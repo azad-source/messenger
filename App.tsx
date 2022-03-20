@@ -8,11 +8,12 @@ import {
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 import { Home } from "./components/screens/Home";
-import { Chats } from "./components/screens/Chats";
+import { Chat } from "./components/screens/Chat";
+import { mainColor } from "@domain/colors";
 
 export type RootStackParam = {
   Home: undefined;
-  Chats: { id: number; someField: string };
+  Chat: { id: number; userName: string };
 };
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
 
   const screenOptions: NativeStackNavigationOptions = {
     headerTitleAlign: "center",
-    headerStyle: { backgroundColor: "#08c" },
+    headerStyle: { backgroundColor: mainColor },
     headerTintColor: "#fff",
   };
 
@@ -34,8 +35,8 @@ export default function App() {
           options={{ title: "Telegram" }}
         />
         <Stack.Screen
-          name="Chats"
-          component={Chats}
+          name="Chat"
+          component={Chat}
           options={{ title: "Chat" }}
         />
       </Stack.Navigator>
