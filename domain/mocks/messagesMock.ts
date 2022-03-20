@@ -2,7 +2,12 @@ import { MessageJsModel } from "@domain/jsModels/MessageJsModel";
 
 export const messagesMock: MessageJsModel[] = [
   { text: "(101) Привет, как дела?", date: new Date(), userId: 101 },
-  { text: "(1) Всё хорошо, как у тебя?", date: new Date(), userId: 1 },
+  {
+    text: "(1) Всё хорошо, как у тебя?",
+    date: new Date(),
+    userId: 1,
+    isViewed: true,
+  },
   { text: "(102) Привет, как дела?", date: new Date(), userId: 102 },
   { text: "(103) Привет, как дела?", date: new Date(), userId: 103 },
   { text: "(104) Привет, как дела?", date: new Date(), userId: 104 },
@@ -15,7 +20,13 @@ export const messagesMock: MessageJsModel[] = [
     userId: 101,
     isEdited: true,
   },
-  { text: "(1) Пишу новый мессенджер, а ты?", date: new Date(), userId: 1 },
+  {
+    text: "(1) Пишу новый мессенджер, а ты?",
+    date: new Date(),
+    userId: 1,
+    isViewed: true,
+    isRead: true,
+  },
   { text: "(102) Чем занимаешься?", date: new Date(), userId: 102 },
   { text: "(103) Чем занимаешься?", date: new Date(), userId: 103 },
   { text: "(104) Чем занимаешься?", date: new Date(), userId: 104 },

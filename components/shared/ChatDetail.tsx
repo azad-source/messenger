@@ -4,6 +4,7 @@ import { messagesMock } from "@domain/mocks/messagesMock";
 import * as React from "react";
 import { StyleSheet, Text, TextInput, View, FlatList } from "react-native";
 import Moment from "moment";
+import { MessageReadStatus } from "./MessageReadStatus";
 
 interface Props {
   id: number;
@@ -39,12 +40,12 @@ export const ChatDetail: React.FC<Props> = ({ id, name }) => {
       <FlatList
         data={messages}
         renderItem={({ item }) => {
+          const isOwnMessage = item.userId === 1;
           return (
-            <View
-              style={[styles.message, item.userId === 1 && styles.ownMessage]}
-            >
+            <View style={[styles.message, isOwnMessage && styles.ownMessage]}>
               <Text style={styles.messageText}>{item.text}</Text>
               <View style={styles.messageInfo}>
+                {isOwnMessage && <MessageReadStatus message={item} />}
                 {item.isEdited && (
                   <Text style={styles.messageEdited}>edited</Text>
                 )}
@@ -86,8 +87,8 @@ const styles = StyleSheet.create({
     width: "70%",
     elevation: 2,
     backgroundColor: secondColor,
-    padding: 10,
-    marginBottom: 10,
+    padding: 8,
+    marginBottom: 8,
     borderRadius: 10,
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
@@ -104,17 +105,17 @@ const styles = StyleSheet.create({
   },
   messageInfo: {
     flexDirection: "row",
-    marginTop: 10,
-    justifyContent: "flex-end",
-  },
-  messageDate: {
-    fontSize: 12,
-    color: "rgba(110,110,110, 0.9)",
+    marginTop: 8,
   },
   messageEdited: {
     fontSize: 12,
     color: "rgba(110,110,110, 0.9)",
     marginRight: 8,
+  },
+  messageDate: {
+    fontSize: 12,
+    color: "rgba(110,110,110, 0.9)",
+    marginLeft: "auto",
   },
   input: {
     backgroundColor: "#fff",

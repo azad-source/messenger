@@ -25,7 +25,7 @@ export const ChatCard: React.FC<Props> = ({ image, name, onClick }) => {
       : nameArr[0][0].toUpperCase();
 
   return (
-    <TouchableHighlight onPress={onClick} underlayColor="#fff">
+    <TouchableHighlight onPress={onClick} underlayColor="#eee">
       <View style={styles.root}>
         <View style={styles.imageWrapper}>
           {!!image ? (
@@ -46,15 +46,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     paddingHorizontal: 10,
-    paddingVertical: 7,
-    marginBottom: 5,
-    elevation: 5,
+    paddingVertical: 5,
+    marginBottom: 4,
+    elevation: 1,
     width: "100%",
     borderRadius: 4,
   },
   imageWrapper: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 100,
     backgroundColor: "#ccc",
     justifyContent: "center",
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
   },
 });
